@@ -26,4 +26,38 @@ public class MasterBizImpl implements IMasterBIz {
 
 	}
 
+	@Override
+	public Master search(int id) {
+		Master master = masterDao.search(id);
+		return master;
+	}
+
+	@Override
+	public int delete(int id) {
+		int count = masterDao.delMaster(id);
+		if(count!=0) {
+			return count;
+		}	
+		return 0;
+	}
+
+	@Override
+	public int update(Master master) {
+		int count = masterDao.updateMaster(master);
+		if(count!=0) {
+			return count;
+		}	
+		return 0;
+	
+	}
+
+	@Override
+	public int add(Master master) {
+		int count = masterDao.addMaster(master);
+		if(count!=0) {
+			return count;
+		}	
+		return 0;
+	}
+
 }

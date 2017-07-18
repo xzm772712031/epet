@@ -31,9 +31,9 @@ public class BaseDao {
 		}
 		
 		
-		protected Connection conn = null;//数据库连接对象
+		private Connection conn = null;//数据库连接对象
 		protected ResultSet res = null;//数据库查询结果集对象
-		protected PreparedStatement pstmt = null;//sql命令预处理对象
+		private PreparedStatement pstmt = null;//sql命令预处理对象
 		
 		//编写创建数据库连接对象的方法
 		private void getConn(){

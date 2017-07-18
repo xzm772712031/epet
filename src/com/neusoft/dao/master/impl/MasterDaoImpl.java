@@ -8,9 +8,11 @@ import java.util.List;
 
 import com.neusoft.dao.BaseDao;
 public class MasterDaoImpl extends BaseDao implements IMasterDao {
+	Master master = null;
 	@Override
+			
 	public Master getMaster(String name, String pwd) {
-			Master master = null;		
+			
 			String sql="select * from master where name = ? and password = ?";
 			Object[] params={name,pwd};
 			res = super.commandQuery(sql, params);
@@ -64,8 +66,7 @@ public class MasterDaoImpl extends BaseDao implements IMasterDao {
 		String sql = "INSERT INTO master(id,name,password,money) VALUES (master_id.nextval,?,?,?) ";
 		Object[] params = {master.getName(),master.getPassword(),master.getMoney()};
 		count = super.commandUpdate(sql, params);
-		
-			return count;
+	    return count;
 		
 	}
 
@@ -86,9 +87,31 @@ public class MasterDaoImpl extends BaseDao implements IMasterDao {
 		String sql = "UPDATE Master SET name = ?,password=?,money=? WHERE id = ? ";
 		Object[] params = {master.getName(),master.getPassword(),master.getMoney(),master.getId()};
 		count = super.commandUpdate(sql, params);
-		
 			return count;
 		
+	}
+
+	@Override
+	public Master search(int id) {
+		// TODO Auto-generated method stub
+		String sql="select * from master where id = ?";
+		Object[] params={id};
+		res = super.commandQuery(sql, params);
+		try {	
+			if(res.next()){
+				master = new Master();
+				master.setId(res.getInt("id"));
+				master.setName(res.getString("name"));
+				master.setPassword(res.getString("password"));
+				master.setMoney(res.getInt("money"));	
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			this.closeAll();
+		}
+		return master;
 	}
 
 }
